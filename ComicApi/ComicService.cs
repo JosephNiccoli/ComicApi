@@ -18,15 +18,16 @@ namespace ComicApi
 			// ADO.NET goes in here // connect to the database
 
 			using (SqlConnection con = new SqlConnection("data source=.; database=ComicApi; integrated security=SSPI"))
+				// the using statment says once you go past the closing curly brace close the connection
 			{
 				con.Open(); // open the connection to the database
-				
+
 				//now that the connection is open you want to run a command
 
 				SqlCommand cmd = con.CreateCommand();
 				// properties on the command u have to fill out
 				cmd.CommandText = "Comics_GetAll"; // stored proc name goes here
-				// there are no prameters to send because we are not asking for a specific person so all it needs to know is get all
+												   // there are no prameters to send because we are not asking for a specific person so all it needs to know is get all
 
 				// create a data reader to loop through all the rows 
 
@@ -36,7 +37,7 @@ namespace ComicApi
 
 					List<Comic> results = new List<Comic>(); // u need to create the list outside of the loop because if u create it in the loop your going to get a new list for every row which you dont want
 					while (dr.Read())
-						// this loop is going to happen once for every row this database is spitting back out at u
+					// this loop is going to happen once for every row this database is spitting back out at u
 					{
 						// the purpose of this loop is to 
 						// create a new Comic object 
@@ -50,7 +51,7 @@ namespace ComicApi
 						comic.Introduction = dr.GetString(4);
 						// and then add that Comic to the list
 						results.Add(comic);
-						}
+					}
 
 					return results;
 				}
