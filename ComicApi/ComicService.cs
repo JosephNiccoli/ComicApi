@@ -47,7 +47,8 @@ namespace ComicApi
 						comic.Id = dr.GetInt32(0);
 						comic.ComicName = dr.GetString(1);
 						comic.ComicCompany = dr.GetString(2);
-						comic.ComicStyle = dr.GetString(3);
+						if (dr.IsDBNull(3) && dr.GetString(3).Equals("none") == false) // if u want a nullable value you have to do it like this
+						//comic.ComicStyle = dr.GetString(3);
 						comic.Introduction = dr.GetString(4);
 						// and then add that Comic to the list
 						results.Add(comic);
