@@ -1,46 +1,43 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
-    <meta charset="utf-8" />
-    <title>Comic Api </title>
 </head>
 <body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.js"></script>
-
-
+<div ng-app="DemoApp">
 	<div ng-controller='DemoController as vm'>
 		<div ng-repeat='comic in vm.comics'>{{comic.ComicName}}, {{ comic.ComicCompany}}, {{comic.ComicStyle}}, {{comic.Introduction}}</div>
 	</div>
-	
-	<script>
-		(function () {
-			angular.module('DemoApp', []);
-		})();
-		(function () {
-			angular.module('demoApp').controller('DemoController', DemoController);
+</div>
 
-			DemoController.$inject = ['$http'];
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.js"></script>    
+<script>
+	(function () {
+		angular.module('DemoApp', []);
+        
+        
+		angular.module('DemoApp').controller('DemoController', DemoController);
 
-			function DemoController($http) {
-				var vm = this;
+		DemoController.$inject = ['$http'];
 
-				$http({
+		function DemoController($http) {
+			var vm = this;
+
+			$http({
 					url: '/api/comic/getall',
 					method: 'GET'
 				})
-					.then(_success, _error);
+				.then(_success, _error);
 
-				function _success(response) {
-					vm.comics = response.data;
-				}
-
-				function _error(err) {
-					console.error(err);
-				}
+			function _success(response) {
+				vm.comics = response.data;
 			}
-		})();
 
-	</script>
+			function _error(err) {
+				console.error(err);
+			}
+		}
+	})();
+
+</script>
 </body>
 </html>
