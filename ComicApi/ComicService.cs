@@ -45,7 +45,7 @@ namespace ComicApi
 						// need to grab each column // Note needs to be in the order that it shows on the sql Stored Proc
 						// id,comic_name,comic_company,comic_style,introduction
 						comic.Id = dr.GetInt32(0);
-						comic.ComicName = dr.GetString(1);
+						comic.ComicName = dr.GetString(1);  
 						comic.ComicCompany = dr.GetString(2);
 						//if (!dr.isDBNull(3)) comic.ComicStyle = dr.GetString(3); // if u want a nullable value you have to do it like this
 						comic.ComicStyle = dr.GetString(3);
